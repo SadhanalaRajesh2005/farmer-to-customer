@@ -1,7 +1,7 @@
 import './FarmerDashboard.css'
 function FarmerDashboard() {
   return (
-    <div>
+    <div className="farmer-dashboard">
       <h2>Farmer Dashboard</h2>
 
       <ul>

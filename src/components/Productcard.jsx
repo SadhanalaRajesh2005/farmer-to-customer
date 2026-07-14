@@ -1,39 +1,23 @@
-// import "./ProductCard.css";
+import './Productcard.css'
 
+function ProductCard({ product }) {
+  if (!product) {
+    return <h3>No Product Available</h3>;
+  }
 
-function ProductCard({product}){
+  return (
+    <div className="card">
+      {/* <img src={product.image} alt={product.name} /> */}
 
+      <h3>{product.name}</h3>
 
-return(
+      <p>Category: {product.category}</p>
 
-<div className="card">
+      <p>Price: ₹{product.price}/kg</p>
 
-
-<img src={product.image}/>
-
-<h3>{product.name}</h3>
-
-<p>
-Category : {product.category}
-</p>
-
-
-<p>
-Price : ₹{product.price}/kg
-</p>
-
-
-<button>
-Buy Now
-</button>
-
-
-</div>
-
-
-)
-
+      <button>Buy Now</button>
+    </div>
+  );
 }
-
 
 export default ProductCard;

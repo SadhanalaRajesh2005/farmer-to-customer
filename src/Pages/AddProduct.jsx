@@ -1,6 +1,8 @@
+import './AddProduct.css'
 function AddProduct() {
   return (
-    <div>
+     <div className="add-product">
+      <div className="add-product-box">
       <h2>Add Product</h2>
 
       <input type="text" placeholder="Product Name" />
@@ -10,6 +12,7 @@ function AddProduct() {
       <br /><br />
 
       <button>Add Product</button>
+    </div>
     </div>
   );
 }

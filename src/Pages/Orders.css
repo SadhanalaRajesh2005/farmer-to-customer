@@ -1,0 +1,44 @@
+/* Orders.css */
+
+.orders {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.orders-box {
+  width: 450px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.orders-box h2 {
+  color: #2e7d32;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.orders-box ol {
+  text-align: left;
+  padding-left: 25px;
+}
+
+.orders-box li {
+  background-color: lightblue;
+  margin: 12px 0;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 18px;
+  color: #333;
+  border-left: 5px solid #4caf50;
+}
+
+.orders-box li:hover {
+  background-color: blue;
+  transition: 0.3s;
+}

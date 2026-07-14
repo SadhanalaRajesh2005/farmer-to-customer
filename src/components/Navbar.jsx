@@ -1,21 +1,74 @@
-import './navbar.css'
-function Navbar() {
-  return (
-    <div>
-      <h2>Farmer to Customer</h2>
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
-      <nav>
-        <a href="/">Home</a> |
-        <a href="/login"> Login</a> |
-        <a href="/register"> Register</a> |
-        <a href="/products"> Products</a>|
-        <a href="/Farmer"> Farmer</a> |
-        <a href="/Customer"> Customer</a> 
-      </nav>
 
-      <hr />
-    </div>
-  );
+function Navbar({user, logout}) {
+
+
+return (
+
+<nav>
+
+
+<h2>
+🌾 Farmer To Customer
+</h2>
+
+
+
+<Link to="/">
+Home
+</Link>
+
+
+
+<Link to="/products">
+Products
+</Link>
+
+
+
+<Link to="/register">
+Register
+</Link>
+
+
+
+<Link to="/cart">
+Cart
+</Link>
+
+
+
+<Link to="/orders">
+Orders
+</Link>
+
+
+
+
+{
+user ?
+
+<button onClick={logout}>
+Logout
+</button>
+
+:
+
+<Link to="/login">
+Login
+</Link>
+
 }
+
+
+
+</nav>
+
+)
+
+}
+
 
 export default Navbar;

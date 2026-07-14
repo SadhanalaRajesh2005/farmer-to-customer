@@ -1,0 +1,42 @@
+/* CustomerDashboard.css */
+
+.customer-dashboard {
+  background-color: #f5f9ff;
+  min-height: 100vh;
+  padding: 40px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.customer-dashboard h2 {
+  color: #1565c0;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.customer-dashboard ul {
+  list-style: none;
+  padding: 0;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.customer-dashboard li {
+  background-color: #ffffff;
+  margin: 15px 0;
+  padding: 18px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  border: 2px solid #2196f3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.customer-dashboard li:hover {
+  background-color: #2196f3;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}

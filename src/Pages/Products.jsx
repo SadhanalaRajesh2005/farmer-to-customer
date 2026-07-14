@@ -1,66 +1,163 @@
-import ProductCard from '../components/Productcard'
-// import "./Products.css";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import './Product.css'
+
+function Products() {
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
 
-function Products(){
+
+  useEffect(() => {
 
 
-const products=[
-
-{
-name:"Tomato",
-category:"Vegetable",
-price:40,
-image:"https://cdn.pixabay.com/photo/1561136598-7f68413baa99.jpg"
-},
-
-{
-name:"Apple",
-category:"Fruit",
-price:120,
-image:"https://cdn.pixabay.com/photo/1560806887-1e4cd0b6cbd6.jpg"
-},
-
-{
-name:"Carrot",
-category:"Vegetable",
-price:50,
-image:"https://cdn.pixabay.com/photo/1447175009-9a9a6f8f7e7.jpg"
-}
-
-];
+    // Farmer Added Products
+    const farmerProducts =
+      JSON.parse(localStorage.getItem("products")) || [];
 
 
-return(
 
-<section>
+    fetch("https://dummyjson.com/products")
 
+      .then(res => res.json())
 
-<h1>Farm Products</h1>
-
-
-<div className="products">
+      .then(data => {
 
 
-{
-products.map((item,index)=>(
+        const apiProducts = data.products.map(product => ({
 
-<ProductCard
-key={index}
-product={item}
-/>
+          id: product.id,
 
-))
+          name: product.title,
 
-}
+          category: product.category,
+
+          price: product.price,
+
+          image: product.thumbnail,
+
+          farmerName: "API Farmer"
 
 
-</div>
+        }));
 
 
-</section>
+        setProducts([
+          ...farmerProducts,
+          ...apiProducts
+        ]);
 
-)
+
+        setLoading(false);
+
+
+      })
+
+      .catch(() => {
+
+        setError("Failed to load products");
+        setLoading(false);
+
+      });
+
+
+  }, []);
+
+
+
+  if(loading){
+
+    return <h2>Loading Products...</h2>
+
+  }
+
+
+
+  if(error){
+
+    return <h2>{error}</h2>
+
+  }
+
+
+
+  return (
+
+    <div className="products">
+
+
+      <h2>🌾 Farmer To Customer Products</h2>
+
+
+
+      {
+        products.map(product => (
+
+
+          <div className="product-card" key={product.id}>
+
+
+            <img
+
+              src={product.image}
+
+              alt={product.name}
+
+              width="200"
+
+              height="150"
+
+            />
+
+
+
+            <h3>
+              {product.name}
+            </h3>
+
+
+
+            <p>
+              Category : {product.category}
+            </p>
+
+
+
+            <p>
+              Price : ₹{product.price}/kg
+            </p>
+
+
+
+            <p>
+              Farmer : {product.farmerName}
+            </p>
+
+
+
+            <Link to={`/product/${product.id}`}>
+
+              <button>
+                View Product
+              </button>
+
+            </Link>
+
+
+          </div>
+
+
+        ))
+
+      }
+
+
+
+    </div>
+
+  )
 
 }
 

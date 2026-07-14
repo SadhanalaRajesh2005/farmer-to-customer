@@ -1,6 +1,7 @@
+import './CustomerDashboard.css'
 function CustomerDashboard() {
   return (
-    <div>
+    <div className="customer-dashboard">
       <h2>Customer Dashboard</h2>
 
       <ul>
