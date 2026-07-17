@@ -1,4 +1,4 @@
-/* Main App Container */
+/* App.css */
 
 * {
   margin: 0;
@@ -6,183 +6,146 @@
   box-sizing: border-box;
 }
 
-
-body {
-
+body,
+html {
   font-family: Arial, Helvetica, sans-serif;
-
-  background-color: #f5fff5;
-
-  color: #333;
-
-}
-
-
-/* App Wrapper */
-
-.app {
-
   min-height: 100vh;
+  transition: all 0.3s ease;
+}
 
+/* App Container */
+.light,
+.dark {
+  min-height: 100vh;
   display: flex;
-
   flex-direction: column;
-
 }
 
+/* Light Theme */
+.light {
+  background-color: #f5f7fa;
+  color: #222;
+}
 
+/* Dark Theme */
+.dark {
+  background-color: #1b1b1b;
+  color: #fff;
+}
 
-/* Page Content */
-
+/* Main Content */
 main {
-
   flex: 1;
-
-  padding: 20px;
-
 }
 
-
-
-/* Headings */
-
-h1, h2, h3 {
-
-  color: #2e7d32;
-
+/* Theme Button Container */
+.theme-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 30px;
 }
 
-
-
-/* Buttons Common Style */
-
-button {
-
-  cursor: pointer;
-
+/* Theme Toggle Button */
+.theme-container button {
+  padding: 10px 20px;
   border: none;
-
+  border-radius: 25px;
+  background: #28a745;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
   transition: 0.3s;
-
 }
 
+.theme-container button:hover {
+  background: #218838;
+  transform: scale(1.05);
+}
 
+/* Route Pages */
+.page-container {
+  flex: 1;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 0;
+}
+
+/* Light Theme Form */
+.light input,
+.light select,
+.light textarea {
+  background: white;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+/* Dark Theme Form */
+.dark input,
+.dark select,
+.dark textarea {
+  background: #2d2d2d;
+  color: white;
+  border: 1px solid #555;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th {
+  background: #28a745;
+  color: white;
+  padding: 12px;
+}
+
+table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.dark table td {
+  border-color: #444;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  transition: 0.3s;
+}
 
 button:hover {
-
-  transform: scale(1.05);
-
+  opacity: 0.9;
 }
 
-
-
-/* Links */
-
-a {
-
-  text-decoration: none;
-
-  color: inherit;
-
+/* Footer */
+footer {
+  margin-top: auto;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
 
+  .theme-container {
+    justify-content: center;
+    padding: 10px;
+  }
 
-/* Forms */
+  .theme-container button {
+    width: 220px;
+  }
 
-input,
-select,
-textarea {
+  table {
+    display: block;
+    overflow-x: auto;
+  }
 
-  width: 300px;
-
-  padding: 12px;
-
-  margin: 8px;
-
-  border: 1px solid #ccc;
-
-  border-radius: 8px;
-
-  outline: none;
-
-}
-
-
-
-input:focus,
-select:focus,
-textarea:focus {
-
-  border-color: green;
-
-}
-
-
-
-/* Dashboard Cards */
-
-.dashboard-card {
-
-  background:white;
-
-  padding:20px;
-
-  border-radius:15px;
-
-  box-shadow:0 5px 15px rgba(0,0,0,0.15);
-
-  margin:20px;
-
-}
-
-
-
-/* Page Center Alignment */
-
-.page-container {
-
-  min-height:70vh;
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-}
-
-
-
-/* Product Images */
-
-img {
-
-  max-width:100%;
-
-}
-
-
-
-/* Mobile Responsive */
-
-@media(max-width:600px){
-
-
-input,
-select,
-textarea{
-
- width:90%;
-
-}
-
-
-body{
-
- font-size:14px;
-
-}
-
-
+  .page-container {
+    width: 95%;
+    padding: 20px 0;
+  }
 }

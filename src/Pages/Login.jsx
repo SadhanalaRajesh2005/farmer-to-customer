@@ -1,195 +1,110 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import "./login.css"
 
+function Login({ setUser }) {
+  const navigate = useNavigate();
 
-function Login({setUser}) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
 
-const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
+  function handleLogin(e) {
+    e.preventDefault();
 
-const [email,setEmail] = useState("");
+    if (email === "" || password === "") {
+      setError("Please enter email and password");
+      setSuccess("");
+      return;
+    }
 
-const [password,setPassword] = useState("");
+    const loginData = {
+      email,
+      role: "farmer",
+    };
 
-const [error,setError] = useState("");
+    localStorage.setItem("loginData", JSON.stringify(loginData));
 
-const [success,setSuccess] = useState("");
+    setUser(loginData);
 
+    setSuccess("Login Successful");
+    setError("");
 
+    setTimeout(() => {
+      navigate("/farmer-dashboard");
+    }, 1000);
+  }
 
-function handleLogin(e){
+  function handleForgotPassword() {
+    const enteredEmail = prompt("Enter your registered email:");
 
-e.preventDefault();
+    if (!enteredEmail) return;
 
+    const users = JSON.parse(localStorage.getItem("users")) || [];
 
+    const user = users.find((u) => u.email === enteredEmail);
 
-if(email === "" || password === ""){
+    if (user) {
+      alert(`Your Password is: ${user.password}`);
+    } else {
+      alert("Email not found!");
+    }
+  }
 
+  return (
+    <div className="login-container">
+      <h2>🌾 Farmer Login</h2>
 
-setError("Please enter email and password");
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-setSuccess("");
+        <div className="password-box">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-return;
+          <button
+            type="button"
+            className="show-password"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
 
+        
 
+        <button type="submit" className="login-btn">
+          Login
+        </button>
+         <div className="forgot-password">
+          <button
+            type="button"
+            className="forgot-btn"
+            onClick={handleForgotPassword}
+          >
+             Forgot Password?
+          </button>
+        </div>
+      </form>
+
+      {error && <p className="error">{error}</p>}
+
+      {success && <p className="success">{success}</p>}
+    </div>
+  );
 }
-
-
-
-// Save Login Data in Local Storage
-
-const loginData = {
-
-email: email,
-
-role: "farmer"
-
-};
-
-
-
-localStorage.setItem(
-
-"loginData",
-
-JSON.stringify(loginData)
-
-);
-
-
-
-
-// Update App State
-
-setUser(loginData);
-
-
-
-setSuccess("Login Successful");
-
-setError("");
-
-
-
-// Redirect to Farmer Dashboard
-
-setTimeout(()=>{
-
-
-navigate("/farmer-dashboard");
-
-
-},1000);
-
-
-
-}
-
-
-
-
-return(
-
-
-<div className="login-container">
-
-
-
-<h2>
-🌾 Farmer Login
-</h2>
-
-
-
-<form onSubmit={handleLogin}>
-
-
-<input
-
-type="email"
-
-placeholder="Enter Email"
-
-value={email}
-
-onChange={(e)=>setEmail(e.target.value)}
-
-/>
-
-
-<br/><br/>
-
-
-
-<input
-
-type="password"
-
-placeholder="Enter Password"
-
-value={password}
-
-onChange={(e)=>setPassword(e.target.value)}
-
-/>
-
-
-
-<br/><br/>
-
-
-
-<button type="submit">
-
-Login
-
-</button>
-
-
-
-</form>
-
-
-
-{
-
-error &&
-
-<p className="error">
-
-{error}
-
-</p>
-
-}
-
-
-
-
-{
-
-success &&
-
-<p className="success">
-
-{success}
-
-</p>
-
-}
-
-
-
-
-</div>
-
-
-)
-
-}
-
 
 export default Login;

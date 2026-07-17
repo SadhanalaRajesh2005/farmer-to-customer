@@ -1,5 +1,5 @@
 footer {
-  background-color: #1e293b;
+  background-color: rgb(225, 152, 216);
   color: white;
   text-align: center;
   padding: 20px;
@@ -13,7 +13,7 @@ footer h3 {
 
 footer p {
   margin: 8px 0;
-  font-size: 16px;
+  /* font-size: 16px;rgb(225, 152, 216); */
 }
 
 footer div {

@@ -9,7 +9,7 @@ function Footer() {
       </p>
 
       <div>
-        <p>📍 Location: Andhra Pradesh, India</p>
+        <p>📍 Location:Guntur Dstrict, Andhra Pradesh, India</p>
         <p>📧 Email: farmercustomer@gmail.com</p>
         <p>📞 Contact: +91 9876543210</p>
       </div>
