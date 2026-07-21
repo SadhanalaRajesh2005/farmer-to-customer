@@ -1,130 +1,135 @@
 import { useState } from "react";
-import "./AddProduct.css";
+import axios from "axios";
 
 function AddProduct() {
+  const [product, setProduct] = useState({
+    name: "",
+    category: "",
+    price: "",
+    quantity: "",
+    farmerName: "",
+    email: "",
+    image: "",
+  });
 
-  const [productName, setProductName] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [farmerName, setFarmerName] = useState("");
+  function handleChange(e) {
+    setProduct({
+      ...product,
+      [e.target.name]: e.target.value,
+    });
+  }
 
-
-
-  const addProduct = (e) => {
-
+  async function handleSubmit(e) {
     e.preventDefault();
 
+    // Validation - last lo || teesesa
+    if (
+      !product.name ||
+      !product.category ||
+      !product.price ||
+      !product.quantity ||
+      !product.farmerName ||
+      !product.email ||
+      !product.image  
+    ) {
+      alert("Please fill all fields");
+      return;
+    }
 
-    const newProduct = {
-      id: Date.now(),
-      name: productName,
-      category: category,
-      price: price,
-      image: "https://via.placeholder.com/250x180?text=" + productName,
-      farmerName: farmerName
-    };
+    try {
+      console.log("Sending Product:", product);
 
+      const response = await axios.post(
+        "http://localhost:3000/api/products",
+        product
+      );
 
+      console.log(response.data);
 
-    const oldProducts =
-      JSON.parse(localStorage.getItem("products")) || [];
+      alert("Product Added Successfully");
 
+      setProduct({
+        name: "",
+        category: "",
+        price: "",
+        quantity: "",
+        farmerName: "",
+        email: "",
+        image: "",
+      });
+    } catch (error) {
+      console.log("Error:", error);
+      console.log("Response:", error.response?.data);
 
-
-    oldProducts.push(newProduct);
-
-
-
-    localStorage.setItem(
-      "products",
-      JSON.stringify(oldProducts)
-    );
-
-
-
-    alert("Product Added Successfully!");
-
-
-
-    setProductName("");
-    setCategory("");
-    setPrice("");
-    setFarmerName("");
-
-  };
-
-
+      alert(error.response?.data?.message || "Product Add Failed");
+    }
+  }
 
   return (
+    <div>
+      <h2>Add Product 🌾</h2>
 
-    <div className="add-product">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          value={product.name}
+          placeholder="Product Name"
+          onChange={handleChange}
+        />
 
-      <div className="add-product-box">
+        <input
+          type="text"
+          name="category"
+          value={product.category}
+          placeholder="Category"
+          onChange={handleChange}
+        />
 
-        <h2>Add Product 🌾</h2>
+        <input
+          type="number"
+          name="price"
+          value={product.price}
+          placeholder="Price"
+          onChange={handleChange}
+        />
 
+        <input
+          type="number"
+          name="quantity"
+          value={product.quantity}
+          placeholder="Quantity"
+          onChange={handleChange}
+        />
 
-        <form onSubmit={addProduct}>
+        <input
+          type="text"
+          name="farmerName"
+          value={product.farmerName}
+          placeholder="Farmer Name"
+          onChange={handleChange}
+        />
 
+        <input
+          type="email" // type email chesina better
+          name="email"
+          value={product.email}
+          placeholder="Email"
+          onChange={handleChange}
+        />
 
-          <input
-            type="text"
-            placeholder="Product Name"
-            value={productName}
-            onChange={(e)=>setProductName(e.target.value)}
-          />
+        <input
+          type="text"
+          name="image"
+          value={product.image}
+          placeholder="Image URL"
+          onChange={handleChange}
+        />
 
-          <br/><br/>
-
-
-          <input
-            type="text"
-            placeholder="Category (Vegetables/Fruits/Cotton/Mirchi)"
-            value={category}
-            onChange={(e)=>setCategory(e.target.value)}
-          />
-
-
-          <br/><br/>
-
-
-          <input
-            type="number"
-            placeholder="Price"
-            value={price}
-            onChange={(e)=>setPrice(e.target.value)}
-          />
-
-
-          <br/><br/>
-
-
-          <input
-            type="text"
-            placeholder="Farmer Name"
-            value={farmerName}
-            onChange={(e)=>setFarmerName(e.target.value)}
-          />
-
-
-          <br/><br/>
-
-
-          <button type="submit">
-            Add Product
-          </button>
-
-
-        </form>
-
-
-      </div>
-
+        <button type="submit">Add Product</button>
+      </form>
     </div>
-
   );
-
 }
-
 
 export default AddProduct;

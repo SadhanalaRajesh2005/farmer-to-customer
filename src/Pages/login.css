@@ -1,67 +1,121 @@
+.login-container {
+  width: 380px;
+  margin: 60px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.login-container h2 {
+  color: #2e7d32;
+  margin-bottom: 25px;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.login-container input:focus {
+  border-color: #2e7d32;
+}
+
 .password-box {
-  position: relative;
-  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .password-box input {
-  width: 100%;
-  padding: 12px;
-  padding-right: 80px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  flex: 1;
+  margin-bottom: 0;
 }
 
 .show-password {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  margin-left: 10px;
+  padding: 10px 14px;
+  background: #1976d2;
+  color: white;
   border: none;
-  background: none;
-  color: green;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
+  transition: 0.3s;
+}
+
+.show-password:hover {
+  background: #0d47a1;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #1b5e20;
 }
 
 .forgot-password {
-  text-align: right;
-  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .forgot-btn {
   background: none;
   border: none;
-  color: blue;
+  color: #1565c0;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .forgot-btn:hover {
   text-decoration: underline;
 }
 
-.login-btn {
-  width: 100%;
-  padding: 12px;
-  background: green;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.login-btn:hover {
-  background: darkgreen;
-}
-
 .error {
   color: red;
-  text-align: center;
-  margin-top: 10px;
+  font-size: 15px;
+  margin-top: 15px;
 }
 
 .success {
   color: green;
-  text-align: center;
-  margin-top: 10px;
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .password-box {
+    flex-direction: column;
+  }
+
+  .show-password {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+  }
 }
