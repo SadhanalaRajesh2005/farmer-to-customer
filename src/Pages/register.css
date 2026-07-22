@@ -1,143 +1,260 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: #f4f7f9;
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* Register Main Container */
 
 .register-container {
-  width: 90%;
-  max-width: 900px;
-  margin: 40px auto;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-top: 50px;
+
+    background: #f1fff1;
+
 }
+
+
+
+/* Heading */
 
 .register-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #2c3e50;
+
+    color: #2e7d32;
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    margin-bottom: 25px;
+
 }
 
-form {
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+
+
+
+
+/* Form Card */
+
+.register-container form {
+
+    width: 380px;
+
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+
 }
 
-form input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  outline: none;
+
+
+
+
+/* Inputs */
+
+.register-container input,
+
+.register-container select {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-bottom: 15px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    outline: none;
+
 }
 
-form input:focus {
-  border-color: #28a745;
+
+
+
+
+.register-container input:focus,
+
+.register-container select:focus {
+
+    border-color: #4caf50;
+
+    box-shadow: 0 0 5px rgba(76,175,80,0.5);
+
 }
 
-/* Password */
 
-.password-container {
-  position: relative;
+
+
+
+/* Password Container */
+
+.password-box {
+
+    position: relative;
+
+    width: 100%;
+
 }
 
-.password-container input {
-  width: 100%;
-  padding-right: 70px;
+
+
+
+
+.password-box input {
+
+    width: 100%;
+
+    padding-right: 75px;
+
+    margin-bottom: 15px;
+
 }
 
-.show-btn {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  border: none;
-  background: transparent;
-  color: #28a745;
-  font-weight: bold;
-  cursor: pointer;
+
+
+
+
+/* Show Password Button */
+
+.show-password {
+
+    position: absolute;
+
+    right: 10px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 55px !important;
+
+    height: 30px;
+
+    padding: 0 !important;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #4caf50 !important;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
 }
 
-.show-btn:hover {
-  color: #1f7a32;
+
+
+
+
+.show-password:hover {
+
+    background: #2e7d32 !important;
+
 }
+
+
+
+
+
+/* Select Dropdown */
+
+.register-container select {
+
+    background: white;
+
+    cursor: pointer;
+
+}
+
+
+
+
 
 /* Register Button */
 
-.register-btn {
-  padding: 12px;
-  background: #28a745;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 17px;
-  cursor: pointer;
+.register-container form > button {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
 }
 
-.register-btn:hover {
-  background: #218838;
+
+
+
+
+.register-container form > button:hover {
+
+    background: #1b5e20;
+
 }
 
-hr {
-  margin: 30px 0;
-}
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-}
 
-table th {
-  background: #28a745;
-  color: white;
-  padding: 12px;
-}
 
-table td {
-  padding: 12px;
-  text-align: center;
-  border: 1px solid #ddd;
-}
 
-table tr:nth-child(even) {
-  background: #f8f8f8;
-}
+/* Mobile Responsive */
 
-.delete-btn {
-  background: crimson;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+@media(max-width:500px){
 
-.delete-btn:hover {
-  background: darkred;
-}
 
-@media (max-width: 768px) {
-  .register-container {
-    width: 95%;
-  }
+    .register-container {
 
-  form {
-    padding: 20px;
-  }
+        padding-top: 30px;
 
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
+    }
+
+
+
+    .register-container form {
+
+        width: 90%;
+
+        padding: 20px;
+
+    }
+
+
+
+    .register-container h2 {
+
+        font-size: 26px;
+
+    }
+
+
+
 }

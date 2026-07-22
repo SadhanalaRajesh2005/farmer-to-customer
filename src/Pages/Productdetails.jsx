@@ -3,33 +3,71 @@ import { useParams } from "react-router-dom";
 import api from "../api/api";
 
 
-function ProductDetails(){
+function ProductDetails() {
+
 
     const { id } = useParams();
 
-    const [product,setProduct] = useState(null);
+
+    const [product, setProduct] = useState(null);
+
+    const [loading, setLoading] = useState(true);
+
+    const [error, setError] = useState("");
+
+
+
+
+
+    // Fetch Single Product
+
+    async function fetchProduct(){
+
+
+        try{
+
+
+            setLoading(true);
+
+
+            const res = await api.get(`/products/${id}`);
+
+
+            setProduct(res.data);
+
+
+        }
+
+
+        catch(err){
+
+
+            console.log(err);
+
+
+            setError("Unable to fetch product details");
+
+
+        }
+
+
+        finally{
+
+
+            setLoading(false);
+
+
+        }
+
+
+    }
+
+
+
 
 
 
     useEffect(()=>{
-
-
-        async function fetchProduct(){
-
-            try{
-
-                const response = await api.get(`/products/${id}`);
-
-                setProduct(response.data);
-
-            }
-            catch(error){
-
-                console.log(error);
-
-            }
-
-        }
 
 
         fetchProduct();
@@ -39,45 +77,132 @@ function ProductDetails(){
 
 
 
-    if(!product){
 
-        return <h2>Product Not Found</h2>;
+
+
+
+
+    if(loading){
+
+
+        return <h2>Loading Product...</h2>
+
 
     }
 
 
 
+
+
+
+    if(error){
+
+
+        return <h2>{error}</h2>
+
+
+    }
+
+
+
+
+
+
+
     return(
 
-        <div>
+
+        <div className="product-details">
 
 
-            <h2>{product.name}</h2>
+
+            <img
+
+                src={product.image}
+
+                alt={product.name}
+
+                width="300"
+
+            />
 
 
-            <p>
+
+
+
+            <h1>
+
+                {product.name}
+
+            </h1>
+
+
+
+
+
+
+            <h3>
+
                 Category: {product.category}
-            </p>
+
+            </h3>
 
 
-            <p>
-                Price: ₹{product.price}
-            </p>
 
 
-            <p>
-                Farmer: {product.farmerName}
-            </p>
 
 
-            <p>
+            <h3>
+
+                Price: ₹{product.price}/kg
+
+            </h3>
+
+
+
+
+
+
+
+            <h3>
+
                 Quantity: {product.quantity} kg
-            </p>
+
+            </h3>
+
+
+
+
+
+
+
+            <h3>
+
+                Farmer: {product.farmerName}
+
+            </h3>
+
+
+
+
+
+
+
+            <h3>
+
+                Email: {product.email}
+
+            </h3>
+
+
+
 
 
         </div>
 
+
     );
+
 
 }
 

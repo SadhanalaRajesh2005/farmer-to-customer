@@ -1,98 +1,70 @@
-// import { Link } from "react-router-dom";
-// import "./navbar.css";
-
-
-// function Navbar({user, logout}) {
-
-
-// return (
-
-// <nav>
-
-
-// <h2>
-// 🌾 Farmer To Customer
-// </h2>
-
-
-
-// <Link to="/">
-// Home
-// </Link>
-
-
-
-// <Link to="/products">
-// Products
-// </Link>
-
-
-
-// <Link to="/register">
-// Register
-// </Link>
-
-
-
-// <Link to="/cart">
-// Cart
-// </Link>
-
-
-
-// <Link to="/orders">
-// Orders
-// </Link>
-
-
-
-
-// {
-// user ?
-
-// <button onClick={logout}>
-// Logout
-// </button>
-
-// :
-
-// <Link to="/login">
-// Login
-// </Link>
-
-// }
-
-
-
-// </nav>
-
-// )
-
-// }
-
-
-// export default Navbar;
-
-import { Link } from "react-router-dom";
-import './navbar.css'
+import { NavLink } from "react-router-dom";
+import "./navbar.css";
 
 function Navbar({ user, logout }) {
   return (
     <nav className="navbar">
-      <Link to="/">Home</Link>
-      <Link to="/products">Products</Link>
-      <Link to="/add-product"> Add Product</Link> 
 
-      {user?.role === "farmer" && <Link to="/farmer-dashboard">Farmer Dashboard</Link>}
-      {user?.role === "customer" && <Link to="/customer-dashboard">Customer Dashboard</Link>}
-      <Link to="/cart">Cart</Link>
-      <Link to="/orders">Orders</Link>
+      <div className="logo">
+        <NavLink to="/">🌾 Farmer To Customer</NavLink>
+      </div>
 
-      {user ? 
-        <button onClick={logout}>Logout ({user.name})</button> : 
-        <Link to="/login">Login</Link>
-      }
+      <div className="nav-links">
+
+        <NavLink to="/">Home</NavLink>
+
+        <NavLink to="/products">Products</NavLink>
+
+        {/* Farmer Links */}
+        {user?.role === "farmer" && (
+          <>
+            <NavLink to="/add-product">Add Product</NavLink>
+
+            <NavLink to="/farmer-dashboard">
+              Farmer Dashboard
+            </NavLink>
+          </>
+        )}
+
+        {/* Customer Links */}
+        {user?.role === "customer" && (
+          <>
+            <NavLink to="/customer-dashboard">
+              Customer Dashboard
+            </NavLink>
+
+            <NavLink to="/cart">Cart</NavLink>
+
+            <NavLink to="/orders">Orders</NavLink>
+          </>
+        )}
+
+      </div>
+
+      <div className="user-section">
+
+        {user ? (
+          <>
+            <span className="welcome">
+              Welcome, {user.name}
+            </span>
+
+            <button className="logout-btn" onClick={logout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <NavLink to="/login">Login</NavLink>
+
+            <NavLink to="/register">Register</NavLink>
+          </>
+        )}
+
+      </div>
+
     </nav>
-  )
+  );
 }
+
 export default Navbar;
