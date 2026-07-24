@@ -2,7 +2,7 @@
     height: 100vh;
     width: 100%;
 
-    background-image: url("https://www.farmatma.in/wp-content/uploads/2018/01/paddy-cultivation.jpg");
+    background-image: url("https://media.istockphoto.com/id/503646746/photo/farmer-spreading-fertilizer-in-the-field-wheat.jpg?s=612x612&w=0&k=20&c=Lgxsjbz0jaYyQrvfzhyAsW2zELtshRP4AtLzkpmcLiE=");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -14,6 +14,7 @@
 
     color: white;
     text-align: center;
+    position: relative;
 }
 
 /* Dark overlay for text visibility */
@@ -27,10 +28,7 @@
     width: 100%;
 
     background: rgba(0,0,0,0.35);
-}
-
-.home {
-    position: relative;
+    z-index: 0;
 }
 
 .home h1,
@@ -40,20 +38,19 @@
     z-index: 1;
 }
 
-
 .home h1 {
     font-size: 50px;
     margin-bottom: 20px;
+    font-weight: bold;
 }
-
 
 .home p {
     font-size: 22px;
     margin-bottom: 30px;
 }
 
-
-.home button {
+/* Shop Now button */
+.shop-now-btn {
     padding: 12px 30px;
     font-size: 18px;
 
@@ -64,9 +61,10 @@
     border-radius: 8px;
 
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-
-.home button:hover {
+.shop-now-btn:hover {
     background-color: darkgreen;
+    transform: scale(1.05);
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./login.css";
 import api from "../api/api";
 
@@ -10,32 +10,30 @@ function Login({ setUser }) {
   const navigate = useNavigate();
 
 
-  const [email, setEmail] = useState("");
+  const [email,setEmail] = useState("");
 
-  const [password, setPassword] = useState("");
+  const [password,setPassword] = useState("");
 
-  const [role, setRole] = useState("");
+  const [showPassword,setShowPassword] = useState(false);
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [error,setError] = useState("");
 
-
-  const [error, setError] = useState("");
-
-  const [success, setSuccess] = useState("");
+  const [success,setSuccess] = useState("");
 
 
 
 
-  async function handleLogin(e) {
+  async function handleLogin(e){
 
     e.preventDefault();
 
 
 
-    if(!email || !password || !role){
+    if(!email || !password){
+
 
       setError(
-        "Please enter email, password and select role"
+        "Please enter email and password"
       );
 
       setSuccess("");
@@ -46,48 +44,79 @@ function Login({ setUser }) {
 
 
 
-    try {
+    try{
 
 
       const response = await api.post(
 
-        "/users/login",
+        "/auth/login",
 
         {
           email,
-          password,
-          role
+          password
         }
 
       );
 
 
 
-      const loginData = response.data;
+      // User data
+
+      const userData =
+      response.data.user;
 
 
 
-      // save only user data
+      // JWT Token
+
+      const token =
+      response.data.token;
+
+
+
+
+      // Save JWT Token
 
       localStorage.setItem(
 
-        "loginData",
+        "token",
 
-        JSON.stringify(loginData.user)
+        token
 
       );
 
 
 
-      // update App user state
 
-      setUser(loginData.user);
+      // Save Login User
+
+      localStorage.setItem(
+
+        "loginData",
+
+        JSON.stringify(userData)
+
+      );
 
 
 
-      setSuccess("Login Successful");
+
+      // Update App State
+
+      setUser(userData);
+
+
+
+
+      setSuccess(
+
+        "Login Successful"
+
+      );
+
 
       setError("");
+
 
 
 
@@ -95,48 +124,63 @@ function Login({ setUser }) {
       setTimeout(()=>{
 
 
-        if(loginData.user.role === "farmer"){
+
+        if(userData.role === "farmer"){
 
 
-          navigate("/farmer-dashboard");
+          navigate(
+            "/farmer-dashboard"
+          );
+
+
+        }
+
+
+        else if(userData.role === "admin"){
+
+
+          navigate(
+            "/admin-dashboard"
+          );
 
 
         }
 
-        else if(loginData.user.role === "customer"){
+
+        else{
 
 
-          navigate("/customer-dashboard");
+          navigate(
+            "/customer-dashboard"
+          );
 
 
         }
+
 
 
       },1000);
 
 
 
+
+
+
     }
 
-
     catch(error){
-
-
-      console.log(error);
-
 
 
       setError(
 
         error.response?.data?.message ||
 
-        "Invalid Email, Password or Role"
+        "Invalid Login Details"
 
       );
 
 
       setSuccess("");
-
 
     }
 
@@ -147,9 +191,13 @@ function Login({ setUser }) {
 
 
 
-  return (
+
+
+  return(
+
 
     <div className="login-container">
+
 
 
       <h2>
@@ -158,21 +206,30 @@ function Login({ setUser }) {
 
 
 
-      <form onSubmit={handleLogin}>
 
+      <form onSubmit={handleLogin}>
 
 
         <input
 
+
           type="email"
+
 
           placeholder="Enter Email"
 
+
           value={email}
 
-          onChange={(e)=>setEmail(e.target.value)}
+
+          onChange={
+            (e)=>setEmail(e.target.value)
+          }
+
 
         />
+
+
 
 
 
@@ -185,9 +242,13 @@ function Login({ setUser }) {
 
             type={
               showPassword
+
               ?
+
               "text"
+
               :
+
               "password"
             }
 
@@ -198,9 +259,14 @@ function Login({ setUser }) {
             value={password}
 
 
-            onChange={(e)=>setPassword(e.target.value)}
+            onChange={
+              (e)=>setPassword(e.target.value)
+            }
+
 
           />
+
+
 
 
 
@@ -213,66 +279,35 @@ function Login({ setUser }) {
             className="show-password"
 
 
-            onClick={()=>setShowPassword(!showPassword)}
+            onClick={
+              ()=>setShowPassword(!showPassword)
+            }
 
 
           >
 
+
             {
+
               showPassword
+
               ?
+
               "Hide"
+
               :
+
               "Show"
+
             }
 
 
           </button>
 
 
+
         </div>
 
-
-
-
-
-        <select
-
-
-          value={role}
-
-
-          onChange={(e)=>setRole(e.target.value)}
-
-
-        >
-
-
-          <option value="">
-
-            Select Role
-
-          </option>
-
-
-
-          <option value="farmer">
-
-            Farmer
-
-          </option>
-
-
-
-          <option value="customer">
-
-            Customer
-
-          </option>
-
-
-
-        </select>
 
 
 
@@ -295,7 +330,30 @@ function Login({ setUser }) {
 
 
 
+
+
+
+        <Link
+
+
+          to="/forgot-password"
+
+
+          className="forgot-password"
+
+
+        >
+
+          Forgot Password?
+
+        </Link>
+
+
+
+
       </form>
+
+
 
 
 
@@ -312,6 +370,7 @@ function Login({ setUser }) {
         </p>
 
       }
+
 
 
 
@@ -335,10 +394,12 @@ function Login({ setUser }) {
 
     </div>
 
+
   );
 
 
 }
+
 
 
 export default Login;

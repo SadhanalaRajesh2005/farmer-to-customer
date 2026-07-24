@@ -1,0 +1,156 @@
+.farmer-orders {
+
+    width: 90%;
+
+    margin: 30px auto;
+
+    padding: 20px;
+
+}
+
+
+
+.farmer-orders h2 {
+
+    text-align: center;
+
+    color: green;
+
+    font-size: 30px;
+
+    margin-bottom: 30px;
+
+}
+
+
+
+
+
+.order-card {
+
+    background: white;
+
+    padding: 20px;
+
+    margin: 20px auto;
+
+    max-width: 500px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+
+    border-left: 6px solid green;
+
+}
+
+
+
+
+
+.order-card h3 {
+
+    color: darkgreen;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+
+
+.order-card p {
+
+    font-size: 16px;
+
+    margin: 8px 0;
+
+    color: #444;
+
+}
+
+
+
+
+
+.order-card button {
+
+    padding: 10px 20px;
+
+    margin: 15px 10px 0 0;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    color: white;
+
+}
+
+
+
+
+
+.order-card button:first-child {
+
+    background: green;
+
+}
+
+
+
+
+
+.order-card button:first-child:hover {
+
+    background: darkgreen;
+
+}
+
+
+
+
+
+.order-card button:last-child {
+
+    background: red;
+
+}
+
+
+
+
+
+.order-card button:last-child:hover {
+
+    background: darkred;
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+
+    .farmer-orders{
+
+        width:95%;
+
+    }
+
+
+    .order-card{
+
+        width:90%;
+
+    }
+
+
+}

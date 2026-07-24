@@ -1,19 +1,36 @@
 import { useState } from "react";
 import api from "../api/api";
+import "./AddProduct.css";
 
 
 function AddProduct() {
 
 
-  const [product, setProduct] = useState({
+  const loginData =
+    JSON.parse(
+      localStorage.getItem("loginData")
+    );
 
-    name: "",
-    category: "",
-    price: "",
-    quantity: "",
-    farmerName: "",
-    email: "",
-    image: "",
+
+  const farmer = loginData;
+
+
+
+  const [product,setProduct] = useState({
+
+    name:"",
+
+    category:"",
+
+    price:"",
+
+    quantity:"",
+
+    farmerName: farmer?.name || "",
+
+    image:"",
+
+    description:""
 
   });
 
@@ -21,15 +38,18 @@ function AddProduct() {
 
 
 
-  function handleChange(e) {
+
+  function handleChange(e){
+
 
     setProduct({
 
       ...product,
 
-      [e.target.name]: e.target.value,
+      [e.target.name]:e.target.value
 
     });
+
 
   }
 
@@ -39,17 +59,14 @@ function AddProduct() {
 
 
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e){
+
 
     e.preventDefault();
 
 
 
-
-
-    // Validation
-
-    if (
+    if(
 
       !product.name ||
 
@@ -59,17 +76,15 @@ function AddProduct() {
 
       !product.quantity ||
 
-      !product.farmerName ||
-
-      !product.email ||
-
       !product.image
 
-    ) {
+    ){
+
 
       alert("Please fill all fields");
 
       return;
+
 
     }
 
@@ -77,11 +92,13 @@ function AddProduct() {
 
 
 
+    try{
 
-    try {
 
-
-      console.log("Sending Product:", product);
+      console.log(
+        "Sending Product:",
+        product
+      );
 
 
 
@@ -95,12 +112,15 @@ function AddProduct() {
 
 
 
+      console.log(
+        response.data
+      );
 
-      console.log(response.data);
 
 
-
-      alert("Product Added Successfully");
+      alert(
+        "Product Added Successfully"
+      );
 
 
 
@@ -108,19 +128,27 @@ function AddProduct() {
 
       setProduct({
 
-        name: "",
 
-        category: "",
+        name:"",
 
-        price: "",
 
-        quantity: "",
+        category:"",
 
-        farmerName: "",
 
-        email: "",
+        price:"",
 
-        image: "",
+
+        quantity:"",
+
+
+        farmerName: farmer?.name || "",
+
+
+        image:"",
+
+
+        description:""
+
 
       });
 
@@ -129,16 +157,11 @@ function AddProduct() {
     }
 
 
-    catch(error) {
+    catch(error){
 
 
-      console.log("Error:", error);
 
-
-      console.log(
-        "Response:",
-        error.response?.data
-      );
+      console.log(error);
 
 
 
@@ -162,17 +185,16 @@ function AddProduct() {
 
 
 
-
   return (
 
 
     <div className="add-product">
 
 
+
       <h2>
         Add Product 🌾
       </h2>
-
 
 
 
@@ -187,9 +209,9 @@ function AddProduct() {
 
           name="name"
 
-          value={product.name}
-
           placeholder="Product Name"
+
+          value={product.name}
 
           onChange={handleChange}
 
@@ -199,20 +221,43 @@ function AddProduct() {
 
 
 
-
-        <input
-
-          type="text"
+        <select
 
           name="category"
 
           value={product.category}
 
-          placeholder="Category"
-
           onChange={handleChange}
 
-        />
+        >
+
+
+          <option value="">
+            Select Category
+          </option>
+
+
+          <option value="Vegetables">
+            Vegetables
+          </option>
+
+
+          <option value="Fruits">
+            Fruits
+          </option>
+
+
+          <option value="Cotton">
+            Cotton
+          </option>
+
+
+          <option value="Mirchi">
+            Mirchi
+          </option>
+
+
+        </select>
 
 
 
@@ -226,9 +271,9 @@ function AddProduct() {
 
           name="price"
 
-          value={product.price}
-
           placeholder="Price"
+
+          value={product.price}
 
           onChange={handleChange}
 
@@ -246,9 +291,9 @@ function AddProduct() {
 
           name="quantity"
 
-          value={product.quantity}
-
           placeholder="Quantity"
+
+          value={product.quantity}
 
           onChange={handleChange}
 
@@ -268,29 +313,7 @@ function AddProduct() {
 
           value={product.farmerName}
 
-          placeholder="Farmer Name"
-
-          onChange={handleChange}
-
-        />
-
-
-
-
-
-
-
-        <input
-
-          type="email"
-
-          name="email"
-
-          value={product.email}
-
-          placeholder="Email"
-
-          onChange={handleChange}
+          readOnly
 
         />
 
@@ -306,9 +329,27 @@ function AddProduct() {
 
           name="image"
 
+          placeholder="Image URL"
+
           value={product.image}
 
-          placeholder="Image URL"
+          onChange={handleChange}
+
+        />
+
+
+
+
+
+
+
+        <textarea
+
+          name="description"
+
+          placeholder="Description"
+
+          value={product.description}
 
           onChange={handleChange}
 
@@ -329,7 +370,6 @@ function AddProduct() {
 
 
 
-
       </form>
 
 
@@ -338,6 +378,7 @@ function AddProduct() {
 
 
   );
+
 
 }
 

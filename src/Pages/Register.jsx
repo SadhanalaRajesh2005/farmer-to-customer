@@ -12,6 +12,9 @@ const navigate = useNavigate();
 const [showPassword,setShowPassword] = useState(false);
 
 
+const [image,setImage] = useState(null);
+
+
 
 const [user,setUser]=useState({
 
@@ -48,11 +51,50 @@ e.preventDefault();
 try{
 
 
+const formData = new FormData();
+
+
+formData.append(
+"name",
+user.name
+);
+
+
+formData.append(
+"email",
+user.email
+);
+
+
+formData.append(
+"password",
+user.password
+);
+
+
+formData.append(
+"role",
+user.role
+);
+
+
+
+if(image){
+
+formData.append(
+"profileImage",
+image
+);
+
+}
+
+
+
 const res = await api.post(
 
-"/users/register",
+"/auth/register",
 
-user
+formData
 
 );
 
@@ -86,7 +128,6 @@ error.response?.data?.message ||
 
 
 
-
 return(
 
 
@@ -100,9 +141,7 @@ Register
 
 
 
-
 <form onSubmit={handleSubmit}>
-
 
 
 <input
@@ -134,8 +173,6 @@ value={user.email}
 onChange={handleChange}
 
 />
-
-
 
 
 
@@ -194,9 +231,7 @@ showPassword
 </button>
 
 
-
 </div>
-
 
 
 
@@ -230,6 +265,22 @@ Farmer
 
 
 </select>
+
+
+
+
+
+{/* Profile Image */}
+
+<input
+
+type="file"
+
+accept="image/*"
+
+onChange={(e)=>setImage(e.target.files[0])}
+
+/>
 
 
 
